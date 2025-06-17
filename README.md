@@ -23,7 +23,7 @@ We built this as a **real-world GenAI application**, ideal for customer support 
 
 ## 🧩 Tech Stack
 
-- **LLM**: `llama3:3.2b` pulled from [Ollama](https://ollama.com/library/llama3)
+- **LLM**: `llama3:3.2b` pulled from [Ollama](https://ollama.com/library/llama3.2)
 - **LangChain**: for prompt templating and chaining
 - **Pandas**: for structured data processing
 - **Python 3.10+**
