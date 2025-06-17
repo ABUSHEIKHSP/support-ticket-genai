@@ -56,28 +56,46 @@ We built this as a **real-world GenAI application**, ideal for customer support 
 
 ## 📥 Input Example
 
-    ```text
-     "My laptop won't start and I have a client meeting in 2 hours. Urgent help needed!"
+  ```text
+  "My laptop won't start and I have a client meeting in 2 hours. Urgent help needed!"
+  ```
 
 ## 📤 Output Format
 
-    ```json
-    {
-    "category": "Hardware issues",
-    "tags": ["laptop", "won't start", "urgent"],
-    "priority": "High",
-    "eta": "Immediate",
-    "response": "Please connect your laptop to power, hold the power button for 10 seconds, and if it doesn’t boot, visit our nearest support center for immediate diagnosis."
-    }
+  ```json
+  {
+  "category": "Hardware issues",
+  "tags": ["laptop", "won't start", "urgent"],
+  "priority": "High",
+  "eta": "Immediate",
+  "response": "Please connect your laptop to power, hold the power button for 10 seconds, and if it doesn’t boot, visit our nearest support center for immediate diagnosis."
+  }
+  ```
 
 ## 📂 File Structure
 
-    ```bash
-    support-ticket-classifier/
-    ├── main.py                # Final implementation
-    ├── requirements.txt       # All dependencies
-    ├── README.md              # Project guide (this file)
+  ```bash
+  support-ticket-classifier/
+  ├── main.py                # Final implementation
+  ├── requirements.txt       # All dependencies
+  ├── README.md              # Project guide (this file)
+  ```
 
+## 📌 Notes
+
+  - This repo includes only the .py file for clean usage.
+  - All logic is built to work on your CPU with a local model using Ollama — no OpenAI key or cloud cost required.
+
+## 🔮 Future Additions
+
+  - ✅ Streamlit or Gradio UI for live input
+  - ✅ Larger dataset integration
+  - ✅ Custom training & finetuning via LoRA
+  - ✅ Dataset export (for future ML pipelines)
+
+## 👨‍💻 Author
+
+Built with ❤️ to demonstrate hands-on GenAI skills using LangChain, Ollama, and lightweight LLMs. Perfect for real-world applications.
     
 
 
