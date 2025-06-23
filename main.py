@@ -6,7 +6,7 @@ from langchain_ollama import OllamaLLM
 
 
 # 1. Load model from Ollama
-llm = OllamaLLM(model="llama3.2", temperature=0) # temperature=0 for consistent output
+llm = OllamaLLM(model="gemma3:1b", temperature=0) # temperature=0 for consistent output
 
 # 2. Prompt template
 template = """
@@ -33,7 +33,7 @@ Instructions:
 
 5. **response**: Provide a clear, calm instruction to the user in 1 sentence.
 
-Only return JSON strictly in this format:(no extra text)
+Output the following data as JSON only, but do not include any code block markers:
 
 {{
   "category": "your_category_prediction",
@@ -42,6 +42,7 @@ Only return JSON strictly in this format:(no extra text)
   "eta": "your_eta_prediction",
   "response": "your_brief_instruction_to_user"
 }}
+
 
 --- Examples ---
 
@@ -102,10 +103,14 @@ prompt = PromptTemplate.from_template(template)
 chain = prompt | llm
 
 # 4. Example data (replace with your own)
+# tickets = [
+#     "Urgent help! My laptop won't turn on and I have a deadline today.",
+#     "Lost all my project files after a system crash. Need recovery.",
+#     "Just need assistance updating my app. Nothing critical."
+# ]
+
 tickets = [
     "Urgent help! My laptop won't turn on and I have a deadline today.",
-    "Lost all my project files after a system crash. Need recovery.",
-    "Just need assistance updating my app. Nothing critical."
 ]
 
 # 5. Classify + clean output
@@ -113,6 +118,9 @@ def classify_ticket(text: str) -> dict:
     with yaspin(text="Classifying...", color="cyan") as spinner:
         result = chain.invoke({"ticket": text})
         spinner.ok("✅")
+
+    # Remove ```json code blockers, if our output has it
+    result = result.replace("```json", "").replace("```", "").strip()
 
     if not result.strip().startswith("{"):
         result = "{" + result
@@ -140,3 +148,4 @@ df["response"] = df["result"].apply(lambda x: x.get("response", ""))
 
 # 8. Show result
 print(df[["ticket", "category", "tags", "priority", "eta", "response"]])
+
